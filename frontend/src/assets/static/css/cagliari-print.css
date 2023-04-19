@@ -1,0 +1,102 @@
+
+
+#menup, .preheader, .logoimg, .logotxt, #sub_nav, #argomenti-sezione, .cerca, .postFooter, .footer-logo, #intro .titolo-sezione form, #mainheader .social {
+    display: none !important;;
+}
+
+#mainheader {
+    height: 96px; 
+    background: none #FFF !important;
+    color: #555 !important;
+}
+
+body.ridotto {
+    padding: 0 !important;
+}
+
+#mainheader.ridotto {
+    height: 96px;
+    position: relative !important;
+    margin: 0;
+}
+
+#menu-sinistro {
+    height: auto;
+    position: relative !important;
+    margin: 0;
+    top:32px !important;
+}
+
+#menu-sinistro h4 svg {
+    display: none;
+}
+
+.logoprint {
+    display: block;
+}
+
+.logoprint h1 {
+    color: #003882;
+}
+
+div#container {
+    width: auto;
+}
+
+#main_container h2 {
+    color:#000 !important;
+}
+
+
+#briciole [class^="offset-"], #briciole [class*=" offset-"] {
+    margin: 0!important;
+}
+
+#briciole a, #menu-sinistro #lista-paragrafi .list-group-item {
+    color: #555 !important;
+    text-decoration: none !important;
+}
+
+#intro [class^="offset-"], #intro [class*=" offset-"] {
+    margin: 0!important;
+}
+
+#intro [class^="col-"], #intro [class*=" col-"] {
+    width: 100%;
+    display: block;
+    flex: none;
+    max-width: 100%;
+}
+
+#footer {
+    height: auto; 
+    background: none #FFF !important;
+    color: #555 !important;
+}
+
+#footer .lista-sezioni {
+    display: none !important;
+}
+
+#footer .lista-linkutili .footer-ammtrasp,
+#footer .lista-linkutili .footer-newsletter,
+#footer .lista-linkutili .footer-seguici {
+    display: none !important;
+}
+
+#footer .lista-linkutili .footer-contatti {
+    width: 100%;
+    display: block;
+    flex: none;
+    max-width: 100%;
+}
+
+#footer .lista-linkutili .footer-contatti a {
+    display: none;
+}
+
+#footer p, #footer a  {
+    color: #555 !important;
+}
+
+.articolo-dettaglio-testo a[href]:after{content: "(" attr(href) ")"}

@@ -1,0 +1,399 @@
+<div class="grid">
+    <div class="col-12">
+        <div style="background: #F5F8FF;">
+            <!-- Dati Contratto-->
+            <div class="card">
+                <h5 class="titolo-form">Dati Contratto</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaPartners" dropdownIcon="pi pi-chevron-down" [(ngModel)]="contratto.partner" optionValue="nome" optionLabel="nome" placeholder=" Seleziona un valore" [ngClass]="{'ng-invalid ng-dirty' : submitted && !contratto.partner}" ></p-dropdown>
+                            <label for="partner">Partner *</label>
+                        </span>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !contratto.partner">Name is required.</small>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaCampagne" [(ngModel)]="contratto.campagna" optionValue="nome" optionLabel="nome" placeholder=" Seleziona un valore" [ngClass]="{'ng-invalid ng-dirty' : submitted && !contratto.campagna}" ></p-dropdown>
+                            <label for="campagna">Campagna *</label>
+                        </span>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !contratto.campagna">Name is required.</small>
+                    </div>
+                </div>
+                <hr class="hr-spazio">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaTipiOfferta" [(ngModel)]="contratto.tipo_offerta" optionValue="nome" optionLabel="nome" placeholder=" Seleziona un valore" [ngClass]="{'ng-invalid ng-dirty' : submitted && !contratto.tipo_offerta}" ></p-dropdown>
+                            <label for="tipo_offerta">Tipo Offerta *</label>
+                        </span>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !contratto.tipo_offerta">Name is required.</small>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaTipiContratto" [(ngModel)]="contratto.tipo_contratto" optionValue="nome" optionLabel="nome" placeholder=" Seleziona un valore" [ngClass]="{'ng-invalid ng-dirty' : submitted && !contratto.tipo_contratto}" ></p-dropdown>
+                            <label for="tipo_contratto">Tipo Contratto *</label>
+                        </span>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !contratto.tipo_contratto">Name is required.</small>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="lista" [(ngModel)]="contratto.lista"/>
+                            <label for="lista">Lista</label>
+                        </span>
+                    </div>
+                </div>
+                <hr class="titolo-form">
+            </div>
+            <!-- Dati Intestatario-->
+            <div class="card">
+                <h5 class="titolo-form">Dati Intestatario</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="nome_intestatario" [(ngModel)]="contratto.nome_intestatario" />
+                            <label for="nome_intestatario">Nome *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="cognome_intestatario" [(ngModel)]="contratto.cognome_intestatario" />
+                            <label for="cognome_intestatario">Cognome *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-inputMask [(ngModel)]="contratto.data_nascita_intestatario" mask="99/99/9999" placeholder="99/99/9999" slotChar="gg/mm/aaaa"></p-inputMask>
+                            <label for="partner">Data Nascita *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="luogo_nascita_intestatario" [(ngModel)]="contratto.luogo_nascita_intestatario" />
+                            <label for="luogo_nascita_intestatario">Luogo Nascita *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-autoComplete [(ngModel)]="contratto.partner" [suggestions]="filteredPartners" (completeMethod)="filterPartner($event)" [dropdown]="true">
+                            </p-autoComplete>
+                            <label for="partner">Tipo Documento *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="ente_rilascio_intestatario" [(ngModel)]="contratto.ente_rilascio_intestatario" />
+                            <label for="ente_rilascio_intestatario">Ente Rilascio *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="numero_doc_intestatario" [(ngModel)]="contratto.numero_doc_intestatario" />
+                            <label for="numero_doc_intestatario">Nr. Documento *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-inputMask [(ngModel)]="contratto.data_rilascio_doc_intestatario" mask="99/99/9999" placeholder="99/99/9999" slotChar="gg/mm/aaaa"></p-inputMask>
+                            <label for="data_rilascio_doc_intestatario">Data Rilascio *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-inputMask [(ngModel)]="contratto.data_scadenza_doc" mask="99/99/9999" placeholder="99/99/9999" slotChar="gg/mm/aaaa"></p-inputMask>
+                            <label for="data_scadenza_doc">Data Scadenza *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="codice_fiscale_intestatario" [(ngModel)]="contratto.codice_fiscale_intestatario" />
+                            <label for="codice_fiscale_intestatario">Codice Fiscale *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="telefono_1_intestatario" [(ngModel)]="contratto.telefono_1_intestatario" />
+                            <label for="telefono_1_intestatario">Telefono 1 *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="telefono_2_intestatario" [(ngModel)]="contratto.telefono_2_intestatario" />
+                            <label for="telefono_2_intestatario">Telefono 2</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="email_intestatario" [(ngModel)]="contratto.email_intestatario" />
+                            <label for="email_intestatario">Email *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Indirizzo di Residenza-->
+            <div class="card">
+                <hr class="titolo-form">
+                <h5 class="titolo-form">Indirizzo Residenza</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-9 ">
+                        <span class="p-float-label">
+                            <input pInputText id="indirizzo_residenza" [(ngModel)]="contratto.indirizzo_residenza" />
+                            <label for="indirizzo_residenza">Indirizzo *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                            <input pInputText id="num_residenza" [(ngModel)]="contratto.num_residenza" />
+                            <label for="num_residenza">Num *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="comune_residenza" [(ngModel)]="contratto.comune_residenza" />
+                            <label for="comune_residenza">Comune *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                            <input pInputText id="prov_residenza" [(ngModel)]="contratto.prov_residenza" />
+                            <label for="prov_residenza">Prov. *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                            <input pInputText id="cap_residenza" [(ngModel)]="contratto.cap_residenza" />
+                            <label for="cap_residenza">Cap *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Indirizzo Fornitura-->
+            <hr class="titolo-form">
+            <div class="card">
+                <h5 class="titolo-form">Indirizzo Fornitura</h5>
+                <div class="field col-12 md:col-12 " style="text-align-last: center;">
+                    <p-inputSwitch (onChange)="indirizzoFornitura($event)" onLabel="yes" offLabel="no"></p-inputSwitch>
+                    <label style="vertical-align: bottom; margin-left: 5px; font-weight: 600;" for="indirizzo_residenza"> Usa Indirizzo Residenza</label>
+                </div>
+                <div class="p-fluid p-formgrid grid" id="fornitura">
+                    <div class="field col-12 md:col-9 ">
+                        <span class="p-float-label">
+                            <input pInputText id="indirizzo_fornitura" [(ngModel)]="contratto.indirizzo_fornitura" />
+                            <label for="indirizzo_fornitura">Indirizzo *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label"> 
+                            <input pInputText id="num_fornitura" [(ngModel)]="contratto.num_fornitura" />
+                            <label for="num_fornitura">Num *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid" id="fornitura2">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                                        <input pInputText id="comune_fornitura" [(ngModel)]="contratto.comune_fornitura" />
+                                        <label for="comune_fornitura">Comune *</label>
+                                    </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                                        <input pInputText id="prov_fornitura" [(ngModel)]="contratto.prov_fornitura" />
+                                        <label for="prov_fornitura">Prov. *</label>
+                                    </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                                        <input pInputText id="cap_fornitura" [(ngModel)]="contratto.cap_fornitura" />
+                                        <label for="cap_fornitura">Cap *</label>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Indirizzo Fatturazione-->
+            <hr class="titolo-form">
+            <div class="card">
+                <h5 class="titolo-form">Indirizzo Fatturazione</h5>
+                <div class="field col-12 md:col-12 " style="text-align-last: center;">
+                    <p-inputSwitch (onChange)="indirizzoFatturazione($event)" onLabel="yes" offLabel="no"></p-inputSwitch>
+                    <label style="vertical-align: bottom; margin-left: 5px; font-weight: 600;" for="indirizzo_fatturazione"> Usa Indirizzo Residenza</label>
+                </div>
+                <div class="p-fluid p-formgrid grid" id="fatturazione">
+                    <div class="field col-12 md:col-9 ">
+                        <span class="p-float-label">
+                            <input pInputText id="indirizzo_fatturazione" [(ngModel)]="contratto.indirizzo_fatturazione" />
+                            <label for="indirizzo_fatturazione">Indirizzo *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label"> 
+                            <input pInputText id="num_fatturazione" [(ngModel)]="contratto.num_fatturazione" />
+                            <label for="num_fatturazione">Num *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid grid" id="fatturazione2">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="comune_fatturazione" [(ngModel)]="contratto.comune_fatturazione" />
+                            <label for="comune_fatturazione">Comune *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                            <input pInputText id="prov_fatturazione" [(ngModel)]="contratto.prov_fatturazione" />
+                            <label for="prov_fatturazione">Prov. *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-3 ">
+                        <span class="p-float-label">
+                            <input pInputText id="cap_fatturazione" [(ngModel)]="contratto.cap_fatturazione" />
+                            <label for="cap_fatturazione">Cap *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Titolarità immobile -->
+            <div class="card">
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-autoComplete [(ngModel)]="contratto.titolarita_immobile" [suggestions]="filteredPartners" (completeMethod)="filterPartner($event)" [dropdown]="true">   </p-autoComplete>
+                            <label for="titolarita_immobile">Titolarità Immobile</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <input pInputText id="fascia_reperibilita" [(ngModel)]="contratto.fascia_reperibilita" />
+                            <label for="fascia_reperibilita">Fascia Reperibilità *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Tipo Fatturazione -->
+            <div class="card">
+                <h5 class="titolo-form">Tipo Fatturazione</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-autoComplete [(ngModel)]="contratto.tipo_fatturazione" [suggestions]="filteredPartners" (completeMethod)="filterPartner($event)" [dropdown]="true">   </p-autoComplete>
+                            <label for="tipo_fatturazione">Tipo Fatturazione *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Modalità Pagament o-->
+            <div class="card">
+                <h5 class="titolo-form">Modalità Pagamento</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-6 ">
+                        <span class="p-float-label">
+                            <p-autoComplete [(ngModel)]="contratto.mod_pagamento" [suggestions]="filteredPartners" (completeMethod)="filterPartner($event)" [dropdown]="true">   </p-autoComplete>
+                            <label for="mod_pagamento">Mod. Pagamento *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="field col-12 md:col-12 " style="text-align-last: center;">
+                    <p-inputSwitch (onChange)="delega($event)" onLabel="yes" offLabel="no"></p-inputSwitch>
+                    <label style="vertical-align: bottom; margin-left: 5px; font-weight: 600;" for="indirizzo_fatturazione"> Delega</label>
+                </div>
+                <div class="p-fluid p-formgrid grid" id="delega">
+                    <div class="field col-12 md:col-4 ">
+                        <span class="p-float-label">
+                            <input pInputText id="nome_delega_pagamento" [(ngModel)]="contratto.nome_delega_pagamento" />
+                            <label for="nome_delega_pagamento">Nome *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-4 ">
+                        <span class="p-float-label"> 
+                            <input pInputText id="cognome_delega_pagamento" [(ngModel)]="contratto.cognome_delega_pagamento" />
+                            <label for="cognome_delega_pagamento">Cognome *</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-4 ">
+                        <span class="p-float-label">
+                            <input pInputText id="codice_fiscale_delega_pagamento" [(ngModel)]="contratto.codice_fiscale_delega_pagamento" />
+                            <label for="codice_fiscale_delega_pagamento">Codice Fiscale *</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Note -->
+            <div class="card">
+                <h5 class="titolo-form">Note</h5>
+                <div class="p-fluid p-formgrid grid">
+                    <div class="field col-12 md:col-12 ">
+                        <span class="p-float-label">
+                            <textarea [(ngModel)]="contratto.note_operatore" id="note_operatore" rows="5" cols="30" pInputTextarea></textarea>
+                            <label for="note_operatore">Note Operatore</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-12 ">
+                        <span class="p-float-label">
+                            <textarea [(ngModel)]="contratto.note_supervisor" id="note_supervisor" rows="5" cols="30" pInputTextarea></textarea>
+                            <label for="note_supervisor">Note Supervisor</label>
+                        </span>
+                    </div>
+                    <div class="field col-12 md:col-12 ">
+                        <span class="p-float-label">
+                            <textarea [(ngModel)]="contratto.note_bo" id="note_bo" rows="5" cols="30" pInputTextarea></textarea>
+                            <label for="note_bo">Note BO</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Caricamento Documenti -->
+            <div class="card">
+                <h5 class="titolo-form">Caricamento Documenti</h5>
+                <div class="p-fluid p-formgrid  md:col-12">
+                    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true" maxFileSize="1000000" fileLimit="5">
+                        <ng-template pTemplate="toolbar">
+                            <div class="py-3">Max 5 files, max dimensione file: 10.00 MB</div>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+            </div>
+            <!-- Caricamento Registrazioni -->
+            <div class="card">
+                <h5 class="titolo-form">Caricamento Registrazioni</h5>
+                <div class="p-fluid p-formgrid  md:col-12">
+                    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true" maxFileSize="1000000" fileLimit="5">
+                        <ng-template pTemplate="toolbar">
+                            <div class="py-3">Max 5 files, max dimensione file: 10.00 MB</div>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                            </ul>
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+            </div>
+
+            <div class="card btn-salva">
+                <p-button (click)="salvaContratto()" label="Salva" icon="pi pi-check" styleClass="p-button"></p-button>
+            </div>
+        </div>
+    </div>
+</div>

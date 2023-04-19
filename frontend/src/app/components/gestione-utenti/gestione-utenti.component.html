@@ -1,0 +1,128 @@
+<div class="p-grid">
+    <div class="dashboard grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="card summary flex justify-content-between">
+                <div>
+                    <span class="title">Supervisor</span>
+                    <span class="detail">Numero dei supervisor</span>
+                </div>
+                <div class="flex align-items-center">
+                    <span class="count revenue p-2">{{accountSupervisor}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 md:col-4">
+            <div class="card summary flex justify-content-between">
+                <div>
+                    <span class="title">Operatori</span>
+                    <span class="detail">Numero degli operatori</span>
+                </div>
+                <div class="flex align-items-center">
+                    <span class="count visitors p-2">{{accountOperatori}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 md:col-4">
+            <div class="card summary flex justify-content-between">
+                <div>
+                    <span class="title">Agenti</span>
+                    <span class="detail">Numero degli agenti</span>
+                </div>
+                <div class="flex align-items-center">
+                    <span class="count purchases p-2">{{accountAgenti}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button style="margin-right: 15px;" pButton pRipple label="Crea Utente" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" routerLink="/registra"></button>
+                    <button pButton pRipple label="Elimina" icon="pi pi-trash" class="p-button-danger p-mb-2" (click)="eliminaUtente()" [disabled]="!selezionaUtenti || !selezionaUtenti.length"></button>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Cerca..." />
+                    </span>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="utenti" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['username','email']" [(selection)]="selezionaUtenti" [rowHover]="true" dataKey="id" styleClass="p-datatable-customers">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="username">Username
+                            <p-sortIcon field="username"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="email">Email
+                            <p-sortIcon field="email"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="ruolo">Ruolo
+                            <p-sortIcon field="ruolo"></p-sortIcon>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-utente>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="utente"></p-tableCheckbox>
+                        </td>
+                        <td><span class="p-column-title"></span> {{utente.username}}
+                        </td>
+                        <td><span class="p-column-title"></span> {{utente.email}}
+                        </td>
+                        <td><span class="p-column-title"></span> {{utente.ruolo}}
+                        </td>
+                        <td>
+                            <button style="margin-right: 5px;" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="modificaAccount(utente)" title="Modifica account"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="eliminaAccount(utente)" title="Elimina account"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In totale ci sono {{utenti ? utenti.length : 0 }} account.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <p-dialog [(visible)]="accountDialog" [style]="{width: '950px'}" header="Dettagli account" [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="p-field">
+                    <label for="username">Username</label>
+                    <input readonly type="text" pInputText id="username" [(ngModel)]="utente.username" required />
+                    <small class="p-invalid" *ngIf="submitted && !utente.name">Name is required.</small>
+                </div>
+
+                <div class="p-field">
+                    <label for="email">Email</label>
+                    <input readonly type="email" pInputText id="email" [(ngModel)]="utente.email" required />
+                    <small class="p-invalid" *ngIf="submitted && !utente.name">Name is required.</small>
+                </div>
+
+                <div class="p-field p-col" style="height: 200px;">
+                    <label for="ruolo">Ruolo</label>
+                    <p-dropdown [options]="permessi" [(ngModel)]="selectedPermessi" placeholder={{utente.ruolo}} required optionLabel="name"></p-dropdown>
+                </div>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Indietro" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Aggiorna" icon="pi pi-check" class="p-button-text" (click)="AggiornaAccount()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+<h1>ciao</h1>

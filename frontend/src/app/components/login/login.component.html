@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<table style="height: 73vh; margin-bottom: 0rem;" class="table table-bordered">
+    <td class="align-middle">
+        <div class="col-md-12 ">
+            <div class="card card-container prova">
+                <img src="assets/layout/images/logo-easy-risparmio.png" style="margin-bottom: 15px;">
+                <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="username">Nome utente</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                        <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
+                            È richiesto il nome utente!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                            <div *ngIf="password.errors.required">È richiesta la password</div>
+                            <div *ngIf="password.errors.minlength">
+                                La password deve essere di almeno 6 caratteri </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">
+                    Accedi
+                  </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                            Accesso fallito: {{ errorMessage }}
+                        </div>
+                    </div>
+                </form>
+
+                <div class="alert alert-success" *ngIf="isLoggedIn">
+                    Loggato come {{ nome }}.
+                    <button (click)="vaiAllaHome()" style="margin-top: 15px;" class="btn btn-primary btn-block">
+                            Prosegui
+                          </button>
+                </div>
+            </div>
+        </div>
+    </td>
+
+</table>

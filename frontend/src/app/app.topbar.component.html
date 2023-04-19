@@ -1,0 +1,34 @@
+<div class="topbar">
+    <div id="topbar-left">
+        <a id="omega-menu-button" href="#" (click)="appMain.toggleMenu($event)">
+            <span class="pi pi-bars"></span>
+        </a>
+        <ng-template ngFor let-item let-last="last" [ngForOf]="items">
+            <span class="topbar-title">{{item.label}}</span>
+        </ng-template>
+    </div>
+
+    <a id="options-menu-button" href="#" (click)="appMain.toggleTopMenu($event)">
+        <span class="pi pi-ellipsis-h"></span>
+    </a>
+
+    <div id="topbar-icons" class="animated" [ngClass]="{'topbar-icons-visible flipInX':appMain.topMenuActive,'flipOutX':appMain.topMenuLeaving}">
+        <a href="#">
+            <span class="topbar-item-text">Messages</span>
+            <span class="topbar-icon pi pi-bell animated swing"></span>
+            <span class="topbar-badge animated rubberBand">5</span>
+        </a>
+        <a *ngIf="showAdminBoard" style="cursor: pointer;" title="Nuovo utente">
+            <span class="topbar-item-text">Nuovo utente</span>
+            <span class="topbar-icon pi pi-fw pi-user-plus" (click)="addUtente()"></span>
+        </a>
+        <a *ngIf="isLoggedIn" style="cursor: pointer;" title="Esci">
+            <span class="topbar-item-text">Esci</span>
+            <span class="topbar-icon pi pi-fw pi-sign-out" (click)="logout()"></span>
+        </a>
+        <a *ngIf="!isLoggedIn" style="cursor: pointer;" title="Accedi">
+            <span class="topbar-item-text">Accedi</span>
+            <span class="topbar-icon pi pi-fw pi-sign-in" (click)="login()"></span>
+        </a>
+    </div>
+</div>
